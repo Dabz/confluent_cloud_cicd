@@ -8,6 +8,10 @@
       {
         "role": "DeveloperRead",
         "resource": "prod.a"
+      },
+      {
+        "role": "DeveloperWrite",
+        "resource": "stephane"
       }
     ],
     "schema_registry": [

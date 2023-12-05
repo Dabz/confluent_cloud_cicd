@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "${var.project}.${var.project_env}.tfstate"
+  }
+}
+
 provider "confluent" {
   kafka_id         = var.kafka_id
   cloud_api_key    = var.cloud_api_key
@@ -38,7 +44,20 @@ data "confluent_kafka_cluster" "cluster" {
 locals {
   topics = jsondecode(file("../env/dev/${var.project}/${var.project_env}/topics.json"))
   rbacs  = jsondecode(file("../env/dev/${var.project}/${var.project_env}/rbacs.json"))
+  idp    = jsondecode(file("../env/dev/${var.project}/${var.project_env}/idp.json"))
 }
+
+##
+## CREATING IDP
+##
+
+module "idp" {
+  source               = "./modules/idp"
+  identity_pool_name   = var.project
+  identity_provider_id = var.identity_provider_id
+  filter               = local.idp.filter
+}
+
 
 ##
 ## CREATING TOPICS
