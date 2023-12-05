@@ -10,13 +10,6 @@ variable "role" {
   type = string
 }
 
-variable "admin_sa" {
-  type = object({
-    api_key    = string
-    api_secret = string
-  })
-}
-
 variable "identity_pool_name" {
   type = string
 }

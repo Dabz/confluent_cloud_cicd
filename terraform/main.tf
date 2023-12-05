@@ -46,7 +46,7 @@ locals {
 
 module "topic" {
   for_each = { for topic in local.topics.topics : topic.name => topic }
-  source   = "./modules/topics"
+  source   = "./modules/topic"
   env_id   = data.confluent_environment.env.id
   kafka_id = data.confluent_kafka_cluster.cluster.id
   topic    = each.value
@@ -68,10 +68,6 @@ module "rbac_kafka" {
   identity_pool_name   = var.project
   identity_provider_id = var.identity_provider_id
   role                 = each.value.role
-  admin_sa = {
-    api_key    = var.cloud_api_key
-    api_secret = var.cloud_api_secret
-  }
 }
 
 module "rbac_schema_registry" {
@@ -82,8 +78,4 @@ module "rbac_schema_registry" {
   identity_pool_name   = var.project
   identity_provider_id = var.identity_provider_id
   role                 = each.value.role
-  admin_sa = {
-    api_key    = var.cloud_api_key
-    api_secret = var.cloud_api_secret
-  }
 }
