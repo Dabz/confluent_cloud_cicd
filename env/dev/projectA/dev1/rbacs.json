@@ -1,0 +1,20 @@
+{
+  "rbacs": {
+    "kafka": [
+      {
+        "role": "DeveloperRead",
+        "resource": "dev.*"
+      },
+      {
+        "role": "DeveloperRead",
+        "resource": "prod.a"
+      }
+    ],
+    "schema_registry": [
+      {
+        "role": "DeveloperRead",
+        "resource": "dev.*"
+      }
+    ]
+  }
+}
