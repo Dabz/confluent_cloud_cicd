@@ -1,0 +1,31 @@
+{
+    "acls": [
+        {
+          "resource_type": "TOPIC",
+          "resource_name": "stephane",
+          "pattern_type": "LITERAL",
+          "principal": "test-sandy1",
+          "host": "*",
+          "operation": "WRITE",
+          "permission": "ALLOW"
+        },
+        {
+          "resource_type": "TOPIC",
+          "resource_name": "stephane",
+          "pattern_type": "LITERAL",
+          "principal": "test-sandy2",
+          "host": "*",
+          "operation": "READ",
+          "permission": "ALLOW"
+        },
+        {
+          "resource_type": "GROUP",
+          "resource_name": "console-consumer",
+          "pattern_type": "PREFIXED",
+          "principal": "test-sandy2",
+          "host": "*",
+          "operation": "READ",
+          "permission": "ALLOW"
+        }
+    ]
+  }
