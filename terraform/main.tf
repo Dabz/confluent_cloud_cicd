@@ -73,6 +73,17 @@ module "topic" {
 }
 
 ##
+## CREATING SERVICE ACCOUNT
+##
+
+module "service_account" {
+  for_each    = { for sa in local.rbacs.serviceaccounts : sa.name => sa }
+  source      = "./modules/serviceaccount"
+  name        = each.value.name
+  description = each.value.description
+}
+
+##
 ## CREATING RBAC
 ##
 
@@ -96,9 +107,3 @@ module "rbac_schema_registry" {
   role                 = each.value.role
 }
 
-module "service_account" {
-  for_each    = { for sa in local.rbacs.serviceaccounts : sa.name => sa }
-  source      = "./modules/serviceaccount"
-  name        = each.value.name
-  description = each.value.description
-}
