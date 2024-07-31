@@ -95,3 +95,10 @@ module "rbac_schema_registry" {
   identity_provider_id = var.identity_provider_id
   role                 = each.value.role
 }
+
+module "service_account" {
+  for_each    = { for sa in local.rbacs.serviceaccounts : sa.name => sa }
+  source      = "./modules/serviceaccount"
+  name        = each.value.name
+  description = each.value.description
+}
