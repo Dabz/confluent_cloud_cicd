@@ -82,6 +82,7 @@ module "schema" {
   path     = each.value
   format   = "AVRO"
   subject  = replace(basename(each.value), ".avsc", "")
+  env_id   = data.confluent_environment.env.id
 }
 
 ##
