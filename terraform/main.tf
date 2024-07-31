@@ -1,7 +1,4 @@
 terraform {
-  backend "local" {
-    path = "${var.project}.${var.project_env}.tfstate"
-  }
 }
 
 provider "confluent" {

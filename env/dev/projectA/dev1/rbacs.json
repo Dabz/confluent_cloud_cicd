@@ -1,4 +1,10 @@
 {
+  "serviceaccounts": [
+    {
+      "name": "s-lv-supply",
+      "description": "Service account used by the OMS application"
+    }
+  ],
   "rbacs": {
     "kafka": [
       {
