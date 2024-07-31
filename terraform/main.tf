@@ -73,14 +73,25 @@ module "topic" {
 }
 
 ##
+## CREATING SCHEMAS
+##
+
+module "schema" {
+  for_each = { for path in fileset(path.module, "../env/dev/${var.project}/${var.project_env}/schemas/*.avsc") : path => path }
+  source   = "./modules/schema"
+  path     = each.value
+  format   = "AVRO"
+  subject  = replace(basename(each.value), ".avsc", "")
+}
+
+##
 ## CREATING SERVICE ACCOUNT
 ##
 
 module "service_account" {
-  for_each    = { for sa in local.rbacs.serviceaccounts : sa.name => sa }
-  source      = "./modules/serviceaccount"
-  name        = each.value.name
-  description = each.value.description
+  for_each       = { for sa in local.rbacs.serviceaccounts : sa.name => sa }
+  source         = "./modules/serviceaccount"
+  serviceaccount = each.value
 }
 
 ##
